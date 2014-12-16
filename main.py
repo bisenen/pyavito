@@ -100,12 +100,5 @@ for x in range(1,10):
     except IOError:
         break
 
-
-
-
-
 for i in exsql("SELECT price,name,new FROM list where price > 2000 and price < 4000 and new = 1 ORDER BY price;"):
     print i
-
-#for i in range(1,999)
-#    url + "&p={0}".format()
