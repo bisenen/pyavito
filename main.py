@@ -76,7 +76,8 @@ def getItem(data):
                     try:
                         if item_url in exsql("SELECT name FROM list WHERE name = '{0}'".format(item_url))[0]:
                             #print exsql("SELECT name FROM list WHERE name = '{0}'".format(item_url))[0]
-                            exsql("UPDATE list SET new = 0 WHERE name = '{0}'".format(item_url))
+                            #exsql("UPDATE list SET new = 0 WHERE name = '{0}'".format(item_url))
+                            pass
                         else:
                             exsql("INSERT INTO list (name,price,new) VALUES ('{0}','{1}',1);".format(item_url, item_price))
                     except IndexError:
@@ -92,7 +93,7 @@ def getItem(data):
 
 
 init_exist_db()
-
+exsql("UPDATE list SET new = 0;")
 for x in range(1,10):
     try:
         getItem(get(url+"&p={0}".format(x)))
@@ -102,3 +103,4 @@ for x in range(1,10):
 
 for i in exsql("SELECT price,name,new FROM list where price > 2000 and price < 4000 and new = 1 ORDER BY price;"):
     print i
+#TAG1
