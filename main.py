@@ -8,6 +8,7 @@ db_filename = 'avito.db'
 query="сервер"
 url="https://www.avito.ru/moskva?view=list&q={0}".format(query)
 host="https://www.avito.ru"
+user_agent='Mozilla/5.0 (Windows NT 6.1; WOW64; rv:12.0) Gecko/20100101 Firefox/12.0'
 new=[]
 
 
@@ -53,7 +54,9 @@ def init_exist_db():
 
 def get(url1):
     #print url1
-    a = urllib2.urlopen(url1)
+    req = urllib2.Request(url1)
+    req.add_unredirected_header('User-Agent', user_agent)
+    a = urllib2.urlopen(req)
     if a.code == 200:
         return a.read()
     else:
@@ -103,6 +106,6 @@ for x in range(1,100):
     except IOError:
         break
 
-for i in exsql("SELECT price,name,new FROM list where price > 24000 and price < 30000 and new = 1 ORDER BY price;"):
+for i in exsql("SELECT price,name,new FROM list where price > 12000 and price < 30000 and new = 1 ORDER BY price;"):
     print i
 
